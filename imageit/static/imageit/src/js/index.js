@@ -39,7 +39,28 @@ class ImageitField{
     }
 
     //Add listener for any changes on the file select input
-    addListeners(){        
+    addListeners(){   
+        // Drag and drop event listeners
+        this.fileInput.addEventListener('dragover', (e: DragEvent) => {
+            e.preventDefault();
+            wrapper.classList.add('imageit-drag-active'); // Add styling class
+        });
+
+        this.fileInput.addEventListener('dragleave', () => {
+            wrapper.classList.remove('imageit-drag-active'); // Remove styling class
+        });
+
+        this.fileInput.addEventListener('drop', (e: DragEvent) => {
+            e.preventDefault();
+            this.fileInput.classList.remove('imageit-drag-active'); // Remove styling class
+
+            const files = e.dataTransfer?.files; // Access dataTransfer safely
+            if (files) {
+                this.addFile(files); // Assign files to the input
+                fileInput.dispatchEvent(new Event('change')); // Trigger change event
+            }
+        });
+        
         this.fileInput.addEventListener('change', this.selectFile.bind(this), false);
     }
 

@@ -9,7 +9,7 @@
             <div class="imageit-hr-container"><span class="imageit-hr"></span><span>  or  </span><span class="imageit-hr"></span></div>
             <div>
                 <label class="imageit-pseudo-selector" {% if widget.attrs.id %}for="{{widget.attrs.id}}"{% endif %}><img class="imageit-folder-icon" src="{% static 'imageit/dist/img/folder.svg' %}"/>Browse Files</label>
-                <input class="imageit-selector" hidden type="{{ widget.type }}" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>
+                <input class="imageit-file-selector" hidden type="{{ widget.type }}" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>
                 {% if not widget.required %}
                     <div>
                         <input class="imageit-clear-image-checkbox" hidden type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"{% if widget.attrs.disabled %} disabled{% endif %}>
