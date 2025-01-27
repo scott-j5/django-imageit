@@ -9,73 +9,44 @@ const opts = {
     staticSrcDir: './imageit/static/imageit/src/',
     devBuild: process.env.NODE_ENV !== "production"
 };
-/*
 module.exports = {
-    entry: opts.staticSrcDir + 'js/index.js',
-    output: {
-        filename: 'js/imageit.js',
-        path: path.resolve(__dirname, 'imageit/static/imageit/dist'),
-    },
-    plugins: [
-        // Copy fonts and images to dist
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: opts.staticSrcDir + "/css", to: "css" },
-                { from: opts.staticSrcDir + "/img", to: "img" }
-            ]
-        }),
+  entry: opts.staticSrcDir + 'js/index.tsx',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ],
-    module: {
-        rules: [
-            // Babel-loader
-            {
-                test: /\.m?js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader?cacheDirectory=true',
-                }
-            },
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  output: {
+      filename: 'js/imageit.js',
+      path: path.resolve(__dirname, 'imageit/static/imageit/dist'),
+  },
+  plugins: [
+    // Copy fonts and images to dist
+    new CopyWebpackPlugin({
+        patterns: [
+            { from: opts.staticSrcDir + "/css", to: "css" },
+            { from: opts.staticSrcDir + "/img", to: "img" }
         ]
-    },
-    optimization: {
-        minimize: true,
-        minimizer: [
-          new TerserPlugin({
-            parallel: true,
-            terserOptions: {
-              ecma: 5
-            }
-          }),
-          new CssMinimizerPlugin(),
-        ],
-        runtimeChunk: false
-    },
-};*/
-module.exports = {
-    entry: opts.staticSrcDir + 'js/index.tsx',
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
-    },
-    output: {
-        filename: 'js/imageit.js',
-        path: path.resolve(__dirname, 'imageit/static/imageit/dist'),
-    },
-    plugins: [
-      // Copy fonts and images to dist
-      new CopyWebpackPlugin({
-          patterns: [
-              { from: opts.staticSrcDir + "/css", to: "css" },
-              { from: opts.staticSrcDir + "/img", to: "img" }
-          ]
+    }),
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          ecma: 5
+        }
       }),
+      new CssMinimizerPlugin(),
     ],
-  };
+    runtimeChunk: false
+  },
+};
