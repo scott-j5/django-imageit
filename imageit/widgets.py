@@ -7,7 +7,7 @@ from .settings import (
 )
 
 class ScaleItImageWidget(ClearableFileInput):
-    template_name = 'imageit/widgets/scale_it_widget.html'
+    template_name = 'imageit/widgets/new_scale_it_widget.html'
     initial_text = 'Current'
 
     def __init__(self, *args, **kwargs):
@@ -22,12 +22,12 @@ class ScaleItImageWidget(ClearableFileInput):
         return context
 
     class Media:
-        css = {"all": ('imageit/dist/css/imageit.css',),}
+        css = {"all": ('imageit/dist/css/new_imageit.css',),}
         js = ('imageit/dist/js/imageit.js',)
 
 
 class CropItImageWidget(MultiWidget):
-    template_name = 'imageit/widgets/crop_it_widget.html'
+    template_name = 'imageit/widgets/new_crop_it_widget.html'
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('multiple') == True:
